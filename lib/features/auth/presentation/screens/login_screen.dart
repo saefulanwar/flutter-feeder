@@ -84,8 +84,9 @@ class LoginScreen extends StatelessWidget {
                         }
                       },
                       icon: Image.network(
-                        'https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.png',
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/24px-Google_%22G%22_logo.svg.png',
                         height: 24,
+                        errorBuilder: (context, error, stackTrace) => const Icon(Icons.g_mobiledata, size: 24),
                       ),
                       label: const Text(
                         'Masuk dengan Google',
