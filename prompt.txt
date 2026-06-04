@@ -1,0 +1,18 @@
+Buatkan issue.md, berisi planning untuk membuat ini:
+
+Buat project baru difolder ini menggunakan Flutter dan gunakan dependency:
+- dio 
+- either_dart
+- flutter_bloc
+- flutter_secure_storage
+- flutter_widget_from_html
+- freezed
+- go_router
+- image_picker
+- webview_flutter
+- flutter_rating_bar
+
+jangan terlalu detail atau low level, cukup instrukan secara high level karena akan digunakan oleh junior programmer atau model ai yang biasa.
+
+
+
