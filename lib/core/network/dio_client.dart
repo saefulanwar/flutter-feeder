@@ -1,30 +1,34 @@
 import 'package:dio/dio.dart';
+import '../storage/secure_storage_client.dart';
 
 class DioClient {
   final Dio _dio;
+  final SecureStorageClient _storage;
 
-  DioClient(this._dio) {
+  DioClient(this._dio, this._storage) {
     _dio.options = BaseOptions(
-      baseUrl: 'https://api.example.com',
+      baseUrl: 'http://10.11.12.142',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
     );
 
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
-          // Do something before request is sent
+        onRequest: (options, handler) async {
+          final token = await _storage.getToken();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          // Do something with response data
           return handler.next(response);
         },
         onError: (DioException e, handler) {
-          // Do something with response error
           return handler.next(e);
         },
       ),
