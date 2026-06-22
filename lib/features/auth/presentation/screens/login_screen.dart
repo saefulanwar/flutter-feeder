@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         },
                         icon: Image.network(
-                          'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/24px-Google_%22G%22_logo.svg.png',
+                          'https://developers.google.com/static/identity/images/g-logo.png',
                           height: 24,
                           errorBuilder: (context, error, stackTrace) => const Icon(Icons.g_mobiledata, size: 24),
                         ),
