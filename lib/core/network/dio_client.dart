@@ -7,7 +7,7 @@ class DioClient {
 
   DioClient(this._dio, this._storage) {
     _dio.options = BaseOptions(
-      baseUrl: 'http://10.11.12.142',
+      baseUrl: 'https://feedmap.uny.ac.id',
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       headers: {

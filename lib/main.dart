@@ -10,6 +10,10 @@ import 'features/auth/data/datasources/auth_remote_data_source.dart';
 import 'features/auth/data/repositories/auth_repository_impl.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth_event.dart';
+import 'features/mahasiswa/data/datasources/mahasiswa_remote_data_source.dart';
+import 'features/mahasiswa/data/repositories/mahasiswa_repository_impl.dart';
+import 'features/mahasiswa/presentation/bloc/mahasiswa_bloc.dart';
+import 'features/mahasiswa/presentation/bloc/ticket_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,18 +24,29 @@ void main() {
   final dioClient = DioClient(Dio(), storageClient);
   final remoteDataSource = AuthRemoteDataSource(dioClient);
   final authRepository = AuthRepositoryImpl(remoteDataSource, storageClient);
+  
+  final mahasiswaRemoteDataSource = MahasiswaRemoteDataSource(dioClient);
+  final mahasiswaRepository = MahasiswaRepositoryImpl(mahasiswaRemoteDataSource);
 
   runApp(
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider<AuthRepositoryImpl>.value(value: authRepository),
+        RepositoryProvider<MahasiswaRepositoryImpl>.value(value: mahasiswaRepository),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
             create: (context) => AuthBloc(authRepository)..add(AuthCheckRequested()),
           ),
+          BlocProvider<MahasiswaBloc>(
+            create: (context) => MahasiswaBloc(mahasiswaRepository),
+          ),
+          BlocProvider<TicketBloc>(
+            create: (context) => TicketBloc(mahasiswaRepository),
+          ),
         ],
+
         child: const MyApp(),
       ),
     ),
